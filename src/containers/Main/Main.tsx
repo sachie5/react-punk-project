@@ -2,13 +2,13 @@ import CardList from "../../components/CardList/CardList";
 import { Beer } from "../../types/types";
 
 type MainProps = {
-    beerInfo: Beer[];
+    beers: Beer[];
 };
 
-const Main = ({ beerInfo }: MainProps) => {
+const Main = ({ beers }: MainProps) => {
  return (
     <main className="main-page" key="main-page">
-        <CardList beers={beerInfo}/>
+        <CardList beers={beers}/>
     </main>
  )
 };

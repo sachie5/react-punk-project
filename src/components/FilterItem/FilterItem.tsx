@@ -6,7 +6,7 @@ type FiltersItemProps = {
 
 const FilterItem = ({ id, name, label }: FiltersItemProps) => {
  return (
-<><input type="checkbox" id={id} name={name} value={label} /><label htmlFor={name}>{label}</label><br /></>
+<><label htmlFor={name} className="nav__label">{label} </label><input type="checkbox" id={id} name={name} value={label} /><br /></>
     );
 };
 

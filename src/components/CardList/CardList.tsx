@@ -10,7 +10,7 @@ const CardList = ({ beers }: CardListProps) => {
     return (
     <div className="card-container">
        {beers.map(beer => (
-        <Card id={beer.id} name={beer.name} image={beer.image_url} tagline={beer.tagline} description={beer.description}/>
+        <Card key={beer.id} id={beer.id} name={beer.name} image={beer.image_url} tagline={beer.tagline} description={beer.description}/>
        ))}
        </div>
     );
