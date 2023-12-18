@@ -2,7 +2,7 @@ import './App.scss';
 import Main from './containers/Main/Main';
 import Navbar from './containers/Navbar/Navbar';
 import beers from './data/beers'; 
-import { FormEvent, useState } from 'react';
+import { FormEvent, MouseEvent, useState } from 'react';
 
 
 const App = () => {
@@ -14,13 +14,17 @@ const handleInput = (event: FormEvent<HTMLInputElement>) => {
     setSearchTerm(newInput);
 };
 
+const [ clickValue, setClickValue ] = useState<string>("");
+
+const handleClick = (event: MouseEvent<HTMLInputElement>)
+
     const filteredBeers = beers.filter(beer => {
         return beer.name.toLowerCase().includes(searchTerm.trim());
     })
 
     return (
     <div className="app">
-        <Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm}/>
+        <Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm} handleClick={handleClick}/>
         <Main beers={filteredBeers}/>
     </div>
     )
