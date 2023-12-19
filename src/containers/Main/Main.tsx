@@ -1,6 +1,7 @@
 import CardList from "../../components/CardList/CardList";
 import { Beer } from "../../types/types";
 
+
 type MainProps = {
     beers: Beer[];
 };
@@ -8,7 +9,7 @@ type MainProps = {
 const Main = ({ beers }: MainProps) => {
  return (
     <main className="main-page" key="main-page">
-        <CardList beers={beers}/>
+   <CardList beers={beers}/>
     </main>
  )
 };

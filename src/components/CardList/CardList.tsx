@@ -1,4 +1,5 @@
 import { Beer } from "../../types/types";
+import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import "./CardList.scss";
 
@@ -10,7 +11,9 @@ const CardList = ({ beers }: CardListProps) => {
     return (
     <div className="card-container">
        {beers.map(beer => (
-        <Card key={beer.id} id={beer.id} name={beer.name} image={beer.image_url} tagline={beer.tagline} description={beer.description}/>
+        <Link to={`beers/${beer.name}`} key={beer.id}>
+            <Card key={beer.id} id={beer.id} name={beer.name} image={beer.image_url} tagline={beer.tagline} description={beer.description}/>
+        </Link> 
        ))}
        </div>
     );

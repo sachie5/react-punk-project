@@ -2,7 +2,7 @@ import "./Navbar.scss";
 import FiltersList from "../../components/FiltersList/FiltersList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import { FormEventHandler, MouseEventHandler } from "react";
-import { Beer } from "../../types/types";
+
 
 type NavbarProps = {
     name: string;
