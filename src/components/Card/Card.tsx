@@ -1,5 +1,6 @@
 import "./Card.scss";
 
+
 type CardProps = {
     id: number;
     name: string;
