@@ -32,10 +32,11 @@ const App = () => {
     return (
         <BrowserRouter>
             <div className="app">
-                <Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm} handleClick={handleClick} value={clickValue} />
-                <Main beers={filteredBeers} />
                 <Routes>
-                    <Route path="/beers/:beerName" element={<BeerInfo beers={beers} />} />
+                <Route path="/" element={
+                <><Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm} handleClick={handleClick} value={clickValue} /><Main beers={filteredBeers} /></>
+                } />
+                    <Route path="/beers/:beerId" element={<BeerInfo beers={beers} />} />
                 </Routes>
             </div>
         </BrowserRouter>
