@@ -1,5 +1,5 @@
 import { Beer } from "../../types/types";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./BeerInfo.scss";
 
 type BeerInfoProps = {
@@ -18,14 +18,15 @@ const BeerInfo = ({ beers }: BeerInfoProps) => {
 
     return (
         <article className="beer-info">
+            <Link to="/"><button className="beer-info__button">Return to Home</button></Link>
                 <img src={`${beer?.image_url}`} className="beer-info__image" alt={`${beer.name}`} />
             <div className="beer-info__main">
                 <h2 className="beer-info__main--name">{`${beer.name}`}</h2>
                 <p className="beer-info__main--extra">{`ABV: ${beer.abv} pH: ${beer.ph}`}</p>
             </div>
             <div className="beer-info__facts">
-                <h3 className="beer-info__facts beer-info__facts--tagline">{`${beer.tagline}`}</h3>
-                <p className="beer-info__facts beer-info__facts--description">{`${beer.description}`}</p>
+                <h3 className="beer-info__facts--tagline">{`${beer.tagline}`}</h3>
+                <p className="beer-info__facts--description">{`${beer.description}`}</p>
                 </div>
                 <div className="beer-info__extras">
                 <h4 className="beer-info__extras--heading">Ingredients:</h4>
@@ -39,7 +40,6 @@ const BeerInfo = ({ beers }: BeerInfoProps) => {
                     {beer.food_pairing.map(pairing => <li>{`${ pairing}`}</li>)}
                 </ul>
             </div>
-            <button className="beer-info__button">Return to Home</button>
         </article>
     )
 };

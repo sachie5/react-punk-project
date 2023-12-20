@@ -36,7 +36,7 @@ const App = () => {
                 <Route path="/" element={
                 <><Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm} handleClick={handleClick} value={clickValue} /><Main beers={filteredBeers} /></>
                 } />
-                    <Route path="/beers/:beerId" element={<BeerInfo beers={beers} />} />
+                    <Route path="beers/:beerId" element={<BeerInfo beers={beers} />} />
                 </Routes>
             </div>
         </BrowserRouter>

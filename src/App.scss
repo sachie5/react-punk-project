@@ -3,10 +3,16 @@
 .app {
   display: flex;
   align-items: center;
+  height: 98vh;
   width: 100%;
-  height: 100vh;
   font-family: $font-body;
   box-sizing: border-box;
-
+  background-color: $primary-color;
   }
   
+  a:link,
+  a:visited
+  {
+    text-decoration: none;
+    color: black;
+  }
