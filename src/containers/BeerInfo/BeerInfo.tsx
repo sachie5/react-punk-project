@@ -7,12 +7,9 @@ type BeerInfoProps = {
 };
 
 const BeerInfo = ({ beers }: BeerInfoProps) => {
-    console.log(useParams());
-
     const { beerId } = useParams();
 
     const beer = beers.find(drink => drink.id.toString() === beerId);
-    console.log(beer)
 
     if(beer === undefined) return <p>Couldn't find the beer in the directory.</p>
 
