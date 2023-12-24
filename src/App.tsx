@@ -12,9 +12,10 @@ const App = () => {
 
     const [beers, setBeers] = useState<Beer[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
+    const [abvNumber, setAbvNumber] = useState<number>(0);
 
 
-    const getBeers = async (/* beerName: string */) => {
+    const getBeers = async () => {
         const url = `https://api.punkapi.com/v2/beers?page=1&per_page=80`;
         const res = await fetch(url);
         const data: Beer[] = await res.json();
@@ -33,17 +34,12 @@ const App = () => {
             setBeers(beers.filter(beer => 
                 beer.name.replace(" ", "").toLowerCase().includes(searchTerm)))
         }
-    }, [searchTerm])
-
-    console.log(searchTerm)
-    console.log(beers.map(beer => console.log(beer.name)))
-
-    const [clickValue, setClickValue] = useState<number>(0);
+    }, [abvNumber, searchTerm])
 
     const handleClick = (event: MouseEvent<HTMLInputElement>) => {
         const newValue = event.currentTarget.value;
         console.log(newValue);
-        setClickValue(Number(newValue));
+        setAbvNumber(Number(newValue));
     } 
 
     return (
@@ -51,7 +47,7 @@ const App = () => {
             <div className="app">
                 <Routes>
                 <Route path="/" element={
-                <><Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm} handleClick={handleClick} value={clickValue} />
+                <><Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm} handleClick={handleClick} value={abvNumber}/>
                  <Main beers={beers} /></>
                 } />
                     <Route path="beers/:beerId" element={<BeerInfo beers={beers} />} />
