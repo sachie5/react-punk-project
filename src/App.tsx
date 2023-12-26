@@ -42,12 +42,9 @@ const App = () => {
       };
 
     useEffect(() => {
-               getBeers(abvNumber, brewedDate, pageNumber); 
-        if (searchTerm !== ""){
-            setBeers(filterBeers);
-        };
+        getBeers(abvNumber, brewedDate, pageNumber); 
     }
-, [abvNumber, brewedDate, pageNumber, abvChecked, phChecked, dateChecked, searchTerm])
+, [abvNumber, brewedDate, pageNumber])
 
 
     const handleInput = (event: FormEvent<HTMLInputElement>) => {
@@ -94,19 +91,18 @@ const App = () => {
       };
 
       const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
-        const button = event.currentTarget.value;
-        if(button === "prev"){
-            if(pageNumber === 0){
-                setPageNumber(0);
+        if(event.currentTarget.id === "previous"){
+            if(pageNumber > 1){
+                 setPageNumber(pageNumber - 1); 
             }
-            setPageNumber(pageNumber - 1);
         } else {
-            if(beers)
-            setPageNumber(pageNumber + 1)
+            if(beers && beers.length > 0){
+            setPageNumber(pageNumber + 1);
         }
-      };
+      }
+    };
 
-      console.log(beers)
+    console.log(pageNumber);
 
     return (
         <BrowserRouter>
