@@ -15,30 +15,30 @@ const App = () => {
     const [abvChecked, setAbvChecked] = useState<boolean>(false);
     const [phChecked, setPhChecked] = useState<boolean>(false);
     const [dateChecked, setDateChecked] = useState<boolean>(false);
+    const [abvNumber, setAbvNumber]=useState<number>(0);
 
 
-    const getBeers = async () => {
-        const url = `https://api.punkapi.com/v2/beers?page=1&per_page=80`;
+
+    const getBeers = async (abv: number) => {
+        const url = `https://api.punkapi.com/v2/beers?page=1&per_page=80&abv_gt=${abv}`;
         const res = await fetch(url);
         const data: Beer[] = await res.json();
         setBeers(data);
       };
 
     useEffect(() => {
-        if(searchTerm === "" && !abvChecked && !phChecked && !dateChecked ){
-        getBeers();
-        } else if (searchTerm !== ""){
-                setBeers(prevBeers => prevBeers.filter(beer => {
-                    if (abvChecked && beer.abv > 6){
-                        return beer.name.replace(" ", "").toLowerCase().includes(searchTerm);
+               getBeers(abvNumber); 
+        if (searchTerm !== ""){
+            setBeers(filterBeers);
+/*                     if (abvChecked && beer.abv > 6){
+                        return newBeers;
                     } else if(phChecked && beer.ph < 4){
-                    return beer.name.replace(" ", "").toLowerCase().includes(searchTerm);
+                    return newBeers;
                 } else if(dateChecked && Number(beer.first_brewed.slice(-4)) < 2010){
-                    return beer.name.replace(" ", "").toLowerCase().includes(searchTerm);
-                }
-                return beer.name.replace(" ", "").toLowerCase().includes(searchTerm);
-        }));
-        }
+                    return newBeers;
+                } 
+                return newBeers; */
+        };
     }
 , [abvChecked, phChecked, dateChecked, searchTerm])
 
@@ -48,9 +48,20 @@ const App = () => {
         setSearchTerm(newInput);
     };
 
+    const filterBeers = beers.filter(beer => {
+        const newBeers = beer.name.replace(" ", "").toLowerCase().includes(searchTerm);
+        return newBeers;
+    }
+    )
 
     const handleAbvChange = () => {
         const newAbvChecked = !abvChecked;
+        if(newAbvChecked === true){
+            setAbvNumber(6);
+        }
+        else{
+            setAbvNumber(0);
+        }
         return setAbvChecked(newAbvChecked);
       };
     
@@ -72,7 +83,7 @@ const App = () => {
                 <Routes>
                 <Route path="/" element={
                 <><Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm} handleAbvChange={handleAbvChange} handleDateChange={handleDateChange} handlePhChange={handlePhChange} abvChecked={abvChecked} phChecked={phChecked} dateChecked={dateChecked}/>
-                 <Main beers={beers} /></>
+                 <Main beers={filterBeers} /></>
                 } />
                     <Route path="beers/:beerId" element={<BeerInfo beers={beers} />} />
                 </Routes>
