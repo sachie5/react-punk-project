@@ -2,7 +2,7 @@ import './App.scss';
 import BeerInfo from './containers/BeerInfo/BeerInfo';
 import Main from './containers/Main/Main';
 import Navbar from './containers/Navbar/Navbar';
-import { FormEvent, useState, useEffect } from 'react';
+import { FormEvent, useState, useEffect, MouseEvent } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Beer } from './types/types';
 
@@ -16,6 +16,7 @@ const App = () => {
     const [phChecked, setPhChecked] = useState<boolean>(false);
     const [dateChecked, setDateChecked] = useState<boolean>(false);
     const [abvNumber, setAbvNumber]=useState<number>(0);
+    const [pageNumber, setPageNumber] = useState<number>(1)
    
     
     const todayDate = new Date();
@@ -29,26 +30,24 @@ const App = () => {
         return newDate;
     };
 
-   const currentDate = formatDate(todayDate);
-   console.log(currentDate)
- 
+   const currentDate = formatDate(todayDate); 
 
    const [brewedDate, setBrewedDate] = useState<string>(currentDate);
   
-    const getBeers = async (abv: number, date: string) => {
-        const url = `https://api.punkapi.com/v2/beers?page=1&per_page=80&brewed_before=${date}&abv_gt=${abv}`;        
+    const getBeers = async (abv: number, date: string, page:number) => {
+        const url = `https://api.punkapi.com/v2/beers?page=${page}&per_page=60&brewed_before=${date}&abv_gt=${abv}`;        
         const res = await fetch(url);
         const data: Beer[] = await res.json();
         setBeers(data);
       };
 
     useEffect(() => {
-               getBeers(abvNumber, brewedDate); 
+               getBeers(abvNumber, brewedDate, pageNumber); 
         if (searchTerm !== ""){
             setBeers(filterBeers);
         };
     }
-, [abvChecked, phChecked, dateChecked, searchTerm])
+, [abvNumber, brewedDate, pageNumber, abvChecked, phChecked, dateChecked, searchTerm])
 
 
     const handleInput = (event: FormEvent<HTMLInputElement>) => {
@@ -75,6 +74,12 @@ const App = () => {
     
       const handlePhChange = () => {
         const newPhChecked = !phChecked;
+        if(newPhChecked === true){
+            filterBeers.filter(beer => {
+        beer.ph < 4})
+        } else {
+            setBeers(filterBeers);
+        }
         return setPhChecked(newPhChecked);
       };
 
@@ -88,13 +93,28 @@ const App = () => {
         return setDateChecked(newDateChecked);
       };
 
+      const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
+        const button = event.currentTarget.value;
+        if(button === "prev"){
+            if(pageNumber === 0){
+                setPageNumber(0);
+            }
+            setPageNumber(pageNumber - 1);
+        } else {
+            if(beers)
+            setPageNumber(pageNumber + 1)
+        }
+      };
+
+      console.log(beers)
+
     return (
         <BrowserRouter>
             <div className="app">
                 <Routes>
                 <Route path="/" element={
                 <><Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm} handleAbvChange={handleAbvChange} handleDateChange={handleDateChange} handlePhChange={handlePhChange} abvChecked={abvChecked} phChecked={phChecked} dateChecked={dateChecked}/>
-                 <Main beers={filterBeers} /></>
+                 <Main beers={filterBeers} handleButtonClick={handleButtonClick}/></>
                 } />
                     <Route path="beers/:beerId" element={<BeerInfo beers={beers} />} />
                 </Routes>

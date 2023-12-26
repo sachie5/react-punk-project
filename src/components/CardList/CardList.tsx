@@ -8,6 +8,9 @@ type CardListProps = {
 };
 
 const CardList = ({ beers }: CardListProps) => {
+    if(beers.length === 0){
+        return <p>No more beers to show.</p>
+       } else {
     return (
     <div className="card-container">
        {beers && beers.map(beer => (
@@ -17,6 +20,7 @@ const CardList = ({ beers }: CardListProps) => {
        ))}
        </div>
     );
+}
 };
 
 export default CardList;
