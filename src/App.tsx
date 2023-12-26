@@ -2,7 +2,7 @@ import './App.scss';
 import BeerInfo from './containers/BeerInfo/BeerInfo';
 import Main from './containers/Main/Main';
 import Navbar from './containers/Navbar/Navbar';
-import { FormEvent, useState, useEffect, ChangeEvent } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Beer } from './types/types';
 
@@ -16,28 +16,36 @@ const App = () => {
     const [phChecked, setPhChecked] = useState<boolean>(false);
     const [dateChecked, setDateChecked] = useState<boolean>(false);
     const [abvNumber, setAbvNumber]=useState<number>(0);
+   
+    
+    const todayDate = new Date();
+    const formatDate = (date: Date) => {
+        let month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        let newDate = `${month}-${year}`
+        if (month < 10){
+            newDate = `0${month}-${year}`
+        }
+        return newDate;
+    };
 
+   const currentDate = formatDate(todayDate);
+   console.log(currentDate)
+ 
 
-
-    const getBeers = async (abv: number) => {
-        const url = `https://api.punkapi.com/v2/beers?page=1&per_page=80&abv_gt=${abv}`;
+   const [brewedDate, setBrewedDate] = useState<string>(currentDate);
+  
+    const getBeers = async (abv: number, date: string) => {
+        const url = `https://api.punkapi.com/v2/beers?page=1&per_page=80&brewed_before=${date}&abv_gt=${abv}`;        
         const res = await fetch(url);
         const data: Beer[] = await res.json();
         setBeers(data);
       };
 
     useEffect(() => {
-               getBeers(abvNumber); 
+               getBeers(abvNumber, brewedDate); 
         if (searchTerm !== ""){
             setBeers(filterBeers);
-/*                     if (abvChecked && beer.abv > 6){
-                        return newBeers;
-                    } else if(phChecked && beer.ph < 4){
-                    return newBeers;
-                } else if(dateChecked && Number(beer.first_brewed.slice(-4)) < 2010){
-                    return newBeers;
-                } 
-                return newBeers; */
         };
     }
 , [abvChecked, phChecked, dateChecked, searchTerm])
@@ -72,10 +80,13 @@ const App = () => {
 
       const handleDateChange = () => {
         const newDateChecked = !dateChecked; 
+        if(newDateChecked === true){
+            setBrewedDate("01-2010");
+        } else {
+            setBrewedDate(currentDate);
+        }
         return setDateChecked(newDateChecked);
       };
-
-      console.log(beers);
 
     return (
         <BrowserRouter>
