@@ -35,7 +35,7 @@ const App = () => {
    const [brewedDate, setBrewedDate] = useState<string>(currentDate);
   
     const getBeers = async (abv: number, date: string, page:number) => {
-        const url = `https://api.punkapi.com/v2/beers?page=${page}&per_page=60&brewed_before=${date}&abv_gt=${abv}`;        
+        const url = `https://api.punkapi.com/v2/beers?per_page=60&page=${page}&brewed_before=${date}&abv_gt=${abv}`;        
         const res = await fetch(url);
         const data: Beer[] = await res.json();
         setBeers(data);
@@ -101,8 +101,6 @@ const App = () => {
         }
       }
     };
-
-    console.log(pageNumber);
 
     return (
         <BrowserRouter>
