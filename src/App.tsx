@@ -2,7 +2,7 @@ import './App.scss';
 import BeerInfo from './containers/BeerInfo/BeerInfo';
 import Main from './containers/Main/Main';
 import Navbar from './containers/Navbar/Navbar';
-import { FormEvent, useState, useEffect, MouseEvent } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Beer } from './types/types';
 

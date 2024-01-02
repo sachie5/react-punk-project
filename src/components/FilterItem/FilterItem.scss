@@ -1,1 +1,9 @@
 @use "../../assets/styles/variables" as *;
+
+.nav {
+
+    &__label{
+        font-size: 20px;
+        padding: 0;
+    }
+}

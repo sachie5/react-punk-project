@@ -38,7 +38,7 @@ const BeerInfo = ({ beers }: BeerInfoProps) => {
                 </ul>
                 <h4 className="beer-info__extras--heading">Food Pairings:</h4>
                 <ul className="beer-info__extras--food">
-                    {beer.food_pairing.map(pairing => <li>{`${ pairing}`}</li>)}
+                    {beer.food_pairing.map(pairing => <li key={`food-${pairing}`}>{`${ pairing}`}</li>)}
                 </ul>
             </div>
         </article>

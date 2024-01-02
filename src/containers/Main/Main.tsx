@@ -2,6 +2,7 @@ import CardList from "../../components/CardList/CardList";
 import Button from "../../components/Button/Button";
 import { Beer } from "../../types/types";
 import { MouseEventHandler } from "react";
+import "./Main.scss";
 
 
 type MainProps = {
