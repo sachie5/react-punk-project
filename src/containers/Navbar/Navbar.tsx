@@ -1,22 +1,26 @@
 import "./Navbar.scss";
 import FiltersList from "../../components/FiltersList/FiltersList";
 import SearchBox from "../../components/SearchBox/SearchBox";
-import { FormEventHandler, MouseEventHandler } from "react";
+import { ChangeEventHandler, FormEventHandler } from "react";
 
 
 type NavbarProps = {
     name: string;
     searchTerm: string;
     handleInput: FormEventHandler<HTMLInputElement>;
-    handleClick: MouseEventHandler<HTMLInputElement>;
-    value: number;
+    handleAbvChange: ChangeEventHandler<HTMLInputElement>;
+    handlePhChange:ChangeEventHandler<HTMLInputElement>;
+    handleDateChange:ChangeEventHandler<HTMLInputElement>;
+    abvChecked: boolean;
+    phChecked: boolean;
+    dateChecked: boolean;
 };
 
-const Navbar = ({ name, handleInput, searchTerm, handleClick, value }: NavbarProps) => {
+const Navbar = ({ name, handleInput, searchTerm, handleAbvChange, handlePhChange, handleDateChange, abvChecked, phChecked, dateChecked }: NavbarProps) => {
    return ( 
    <nav className={name}>
     <SearchBox id="search" name="search" placeholder="Type a beer..." handleInput={handleInput} searchTerm={searchTerm}/>
-    <FiltersList abv={6} ph={4} firstBrewed="" handleClick={handleClick} value={value}/>
+    <FiltersList  handleAbvChange={handleAbvChange} handlePhChange={handlePhChange} handleDateChange={handleDateChange} abvChecked={abvChecked} phChecked={phChecked} dateChecked={dateChecked}/>
     </nav>
     )
 };

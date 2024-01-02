@@ -1,6 +1,9 @@
+@use "../../assets/styles/variables" as *;
+
 .searchbox {
-   
+   font-size: 30px;
+
     &__input{
-        
+        height: 30px;
     }
-}
+};
