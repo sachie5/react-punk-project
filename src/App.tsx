@@ -10,15 +10,7 @@ import { Beer } from './types/types';
 
 const App = () => {
 
-    const [beers, setBeers] = useState<Beer[]>([]);
-    const [searchTerm, setSearchTerm] = useState<string>("");
-    const [abvChecked, setAbvChecked] = useState<boolean>(false);
-    const [phChecked, setPhChecked] = useState<boolean>(false);
-    const [dateChecked, setDateChecked] = useState<boolean>(false);
-    const [abvNumber, setAbvNumber] = useState<number>(0);
- /*    const [pageNumber, setPageNumber] = useState<number>(0); */
-
-    //format date
+    //Format date for parameter
     const todayDate = new Date();
     const formatDate = (date: Date) => {
         let month = date.getMonth() + 1;
@@ -29,33 +21,41 @@ const App = () => {
         }
         return newDate;
     };
-
     const currentDate = formatDate(todayDate);
 
+
+    const [beers, setBeers] = useState<Beer[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    const [abvChecked, setAbvChecked] = useState<boolean>(false);
+    const [phChecked, setPhChecked] = useState<boolean>(false);
+    const [dateChecked, setDateChecked] = useState<boolean>(false);
+    const [abvNumber, setAbvNumber] = useState<number>(0);
     const [brewedDate, setBrewedDate] = useState<string>(currentDate);
-    
+    /*    const [pageNumber, setPageNumber] = useState<number>(0); */
+
     const getBeers = async (abv: number, date: string) => {
         const beersData: Beer[] = [];
-        for (let pageNo = 1; pageNo < 11; pageNo++){
-        const url = `https://api.punkapi.com/v2/beers?brewed_before=${date}&abv_gt=${abv}&page=${pageNo}`;
-        const res = await fetch(url);
-        const data: Beer[] = await res.json();
-;       beersData.push(...data);
+        for (let pageNo = 1; pageNo < 11; pageNo++) {
+            const url = `https://api.punkapi.com/v2/beers?brewed_before=${date}&abv_gt=${abv}&page=${pageNo}`;
+            const res = await fetch(url);
+            const data: Beer[] = await res.json();
+            ; beersData.push(...data);
         }
         setBeers(beersData);
         console.log(beersData);
     };
-
 
     useEffect(() => {
         getBeers(abvNumber, brewedDate);
     }
         , [abvNumber, brewedDate])
 
-    // Filter beers based on search term
+    // Filter beers based on search term and ph
     const filterBeers = beers.filter(beer => {
-        const newBeers = beer.name.replace(" ", "").toLowerCase().includes(searchTerm);
-        return newBeers;
+        if (phChecked) {
+            return beer.name.replace(" ", "").toLowerCase().includes(searchTerm) && beer.ph < 4;
+        }
+        return beer.name.replace(" ", "").toLowerCase().includes(searchTerm);
     }
     )
 
@@ -64,26 +64,10 @@ const App = () => {
         setSearchTerm(newInput);
     };
 
-
-    // Filter beers for ph including searchterm
-    const phBeers = beers.filter(beer =>
-        beer.name.replace(" ", "").toLowerCase().includes(searchTerm) && beer.ph < 4)
-
-            
     const handlePhChange = () => {
         const newPhChecked = !phChecked;
         setPhChecked(newPhChecked);
     };
-
-    // ph filter useeffect
-    useEffect(() => {
-        if (phChecked) {
-            setBeers(phBeers);
-        } else {
-            setBeers(filterBeers);
-        }
-    }, [phChecked])
-
 
     // High ABV filter
     const handleAbvChange = () => {
@@ -109,17 +93,17 @@ const App = () => {
     };
 
     // Change page with additional beers
-/*     const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
-        if (event.currentTarget.id === "previous") {
-            if (pageNumber > 1) {
-                setPageNumber(pageNumber - 1);
+    /*     const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
+            if (event.currentTarget.id === "previous") {
+                if (pageNumber > 1) {
+                    setPageNumber(pageNumber - 1);
+                }
+            } else {
+                if (beers && beers.length > 0) {
+                    setPageNumber(pageNumber + 1);
+                }
             }
-        } else {
-            if (beers && beers.length > 0) {
-                setPageNumber(pageNumber + 1);
-            }
-        }
-    }; */
+        }; */
 
     return (
         <BrowserRouter>
