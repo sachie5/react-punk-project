@@ -9,7 +9,7 @@ type CardListProps = {
 
 const CardList = ({ beers }: CardListProps) => {
     if(beers.length === 0){
-        return <p>No more beers to show.</p>
+        return <p className="default">There are no beers to show.</p>
        } else {
     return (
     <div className="card-container">

@@ -2,7 +2,7 @@ import './App.scss';
 import BeerInfo from './containers/BeerInfo/BeerInfo';
 import Main from './containers/Main/Main';
 import Navbar from './containers/Navbar/Navbar';
-import { FormEvent, useState, useEffect } from 'react';
+import { FormEvent, MouseEvent, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Beer } from './types/types';
 
@@ -31,23 +31,24 @@ const App = () => {
     const [dateChecked, setDateChecked] = useState<boolean>(false);
     const [abvNumber, setAbvNumber] = useState<number>(0);
     const [brewedDate, setBrewedDate] = useState<string>(currentDate);
-    /*    const [pageNumber, setPageNumber] = useState<number>(0); */
+    const [pageNumber, setPageNumber] = useState<number>(30); 
 
     const getBeers = async (abv: number, date: string) => {
         const beersData: Beer[] = [];
-        for (let pageNo = 1; pageNo < 11; pageNo++) {
-            const url = `https://api.punkapi.com/v2/beers?brewed_before=${date}&abv_gt=${abv}&page=${pageNo}`;
+        for (let pageNumber = 1; pageNumber < 11; pageNumber++) {
+            const url = `https://api.punkapi.com/v2/beers?brewed_before=${date}&abv_gt=${abv}&page=${pageNumber}`;
             const res = await fetch(url);
             const data: Beer[] = await res.json();
             ; beersData.push(...data);
         }
         setBeers(beersData);
+        console.log(beersData);
     };
 
     useEffect(() => {
         getBeers(abvNumber, brewedDate);
     }
-        , [abvNumber, brewedDate])
+        , [abvNumber, brewedDate,])
 
     // Filter beers based on search term and ph
     const filterBeers = beers.filter(beer => {
@@ -92,7 +93,7 @@ const App = () => {
     };
 
     // Change page with additional beers
-    /*     const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
+    const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
             if (event.currentTarget.id === "previous") {
                 if (pageNumber > 1) {
                     setPageNumber(pageNumber - 1);
@@ -102,7 +103,7 @@ const App = () => {
                     setPageNumber(pageNumber + 1);
                 }
             }
-        }; */
+        }; 
 
     return (
         <BrowserRouter>
@@ -110,7 +111,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={
                         <><Navbar name="nav" handleInput={handleInput} searchTerm={searchTerm} handleAbvChange={handleAbvChange} handleDateChange={handleDateChange} handlePhChange={handlePhChange} abvChecked={abvChecked} phChecked={phChecked} dateChecked={dateChecked} />
-                            <Main beers={filterBeers} handleButtonClick={handleAbvChange} /></>
+                            <Main beers={filterBeers} /></>
                     } />
                     <Route path="beers/:beerId" element={<BeerInfo beers={beers} />} />
                 </Routes>
