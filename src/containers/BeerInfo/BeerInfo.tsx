@@ -11,7 +11,11 @@ const BeerInfo = ({ beers }: BeerInfoProps) => {
 
     const beer = beers.find(drink => drink.id.toString() === beerId);
 
-    if(beer === undefined) return <p>Couldn't find the beer in the directory.</p>
+    if(beer === undefined) return <p>Couldn't find the beer in the directory.</p>;
+
+    const malt = [...new Set(beer.ingredients.malt.map(malt => malt.name))];
+    const hops = [...new Set(beer.ingredients.hops.map(hops => hops.name))];
+    
 
     return (
         <article className="beer-info">
@@ -28,9 +32,9 @@ const BeerInfo = ({ beers }: BeerInfoProps) => {
                 <div className="beer-info__extras">
                 <h4 className="beer-info__extras--heading">Ingredients:</h4>
                 <ul className="beer-info__extras--ingredients"> 
-                    <li className="list-item1">Malt : {`${beer.ingredients.malt.map(malt => malt.name)}`} </li>
-                    <li className="list-item2">Hops : {`${beer.ingredients.hops.map(hops => hops.name)}`} </li>
-                    <li className="list-item3">Yeast : {`${beer.ingredients.yeast}`} </li>
+                    <li className="list-item1" key={`malt-name${beer.id}`}>Malt : {`${malt.map(malt => ` ${malt}`)} `} </li>
+                    <li className="list-item2" key={`hops-name${beer.id}`}>Hops : {`${hops.map(hops => ` ${hops}`)} `} </li>
+                    <li className="list-item3" key={`yeast-name${beer.id}`}>Yeast : {`${beer.ingredients.yeast} `} </li>
                 </ul>
                 <h4 className="beer-info__extras--heading">Food Pairings:</h4>
                 <ul className="beer-info__extras--food">
