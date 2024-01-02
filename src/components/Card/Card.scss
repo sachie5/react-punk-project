@@ -1,4 +1,4 @@
-@use "../../assets/styles/variables" as *;
+@use "../../assets/styles/variables"as *;
 
 .beer-card {
     border: 2px solid $tertiary-color;
@@ -9,64 +9,61 @@
     align-items: center;
     overflow: hidden;
     justify-content: center;
-    height: 500px;
+    height: 200px;
     padding: 10px;
     background-color: #FFFFFF;
-    
-    &__image{
-    height: 5rem;
-    position:relative;
+    text-align: center;
+
+    &__image {
+        height: 7rem;
+        position: relative;
     }
 
-    &__info{
+    &__info {
         height: fit-content;
 
     }
 
-    &__name{
-        font-size: 16px;
-        overflow: hidden;
-        text-overflow: clip;
-        display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;
+    &__name {
+        font-size: 15px;
     }
 
-    &__tagline{
-        font-size: 12px;
-    }    
+    &__tagline {
+        display: none;
+    }
 
     &__description {
-        font-size: 8px;
-        text-align: center;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
--webkit-line-clamp: 3;
--webkit-box-orient: vertical;
-
+        display: none;
     }
 }
 
 @media screen and (min-width: 768px) {
-    .beer-card{
+    .beer-card {
+        height: 500px;
 
-        &__image{
+        &__image {
             height: 12rem;
         }
 
         &__name {
             font-size: 24px;
-            text-align: center;
         }
 
         &__tagline {
+            display:contents;
             font-size: 20px;
             text-align: center;
         }
 
-        &__description{
+        &__description {
+            display: flex;
             font-size: 18px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
         }
     }
 }

@@ -5,10 +5,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
     border: 3px solid $tertiary-color;
     width: 100%;
-    height: 100%;
+    height: 97vh;
     background-color: $primary-color;
     border-radius: 5px;
 
@@ -27,16 +26,16 @@
         box-shadow: 5px 10px 5px;
 
         &--name {
-            font-size: 30px;
+            font-size: 20px;
         }
 
         &--extra{
-            font-size: 22px;
+            font-size: 18px;
         }
     }
 
     &__facts{
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
 
         &--tagline{
@@ -45,19 +44,22 @@
 
         &--description {
             text-align: justify;
+            padding: 0 10px;
         }
     }
 
     &__extras{
         
+        padding: 10px;
+        
         &--heading{
-            font-size: 18px;
+            font-size: 14px;
             margin: 0;
         }
 
         &--ingredients,
         &--food {
-            font-size: 20px;
+            font-size: 12px;
 
         }
     }
@@ -70,5 +72,60 @@
         font-size: 16px;
         border: 2px solid $tertiary-color;
         box-shadow: 5px 5px 5px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .beer-info{
+        padding: 5px 0;
+        height: 100%;
+    
+        &__main {
+    
+            &--name {
+                font-size: 30px;
+            }
+    
+            &--extra{
+                font-size: 22px;
+            }
+        }
+    
+        &__facts{
+            font-size: 18px;
+    
+            &--tagline{
+                text-align: center;
+            }
+    
+            &--description {
+                text-align: justify;
+                padding: 10px;
+            }
+        }
+    
+        &__extras{
+            
+            &--heading{
+                font-size: 18px;
+                margin: 0;
+            }
+    
+            &--ingredients,
+            &--food {
+                font-size: 20px;
+    
+            }
+        }
+    
+        &__button{
+            background-color: white;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            border: 2px solid $tertiary-color;
+            box-shadow: 5px 5px 5px;
+        }
     }
 }

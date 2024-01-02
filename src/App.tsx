@@ -30,8 +30,7 @@ const App = () => {
     const [phChecked, setPhChecked] = useState<boolean>(false);
     const [dateChecked, setDateChecked] = useState<boolean>(false);
     const [abvNumber, setAbvNumber] = useState<number>(0);
-    const [brewedDate, setBrewedDate] = useState<string>(currentDate);
-    const [pageNumber, setPageNumber] = useState<number>(30); 
+    const [brewedDate, setBrewedDate] = useState<string>(currentDate); 
 
     const getBeers = async (abv: number, date: string) => {
         const beersData: Beer[] = [];
