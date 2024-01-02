@@ -2,7 +2,7 @@ import './App.scss';
 import BeerInfo from './containers/BeerInfo/BeerInfo';
 import Main from './containers/Main/Main';
 import Navbar from './containers/Navbar/Navbar';
-import { FormEvent, MouseEvent, useState, useEffect } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Beer } from './types/types';
 
@@ -91,19 +91,6 @@ const App = () => {
         }
         return setDateChecked(newDateChecked);
     };
-
-    // Change page with additional beers
-    const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
-            if (event.currentTarget.id === "previous") {
-                if (pageNumber > 1) {
-                    setPageNumber(pageNumber - 1);
-                }
-            } else {
-                if (beers && beers.length > 0) {
-                    setPageNumber(pageNumber + 1);
-                }
-            }
-        }; 
 
     return (
         <BrowserRouter>
