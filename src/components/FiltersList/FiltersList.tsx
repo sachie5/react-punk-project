@@ -1,21 +1,22 @@
-import { MouseEventHandler } from "react";
+import { ChangeEventHandler } from "react";
 import FilterItem from "../FilterItem/FilterItem";
 import "./FiltersList.scss";
 
 type FiltersListProps = {
-    abv: number;
-    ph: number;
-    firstBrewed: string;
-    handleClick: MouseEventHandler<HTMLInputElement>;
-    value: number;
+    handleAbvChange: ChangeEventHandler<HTMLInputElement>;
+    handleDateChange: ChangeEventHandler<HTMLInputElement>;
+    handlePhChange: ChangeEventHandler<HTMLInputElement>;
+    abvChecked: boolean;
+    phChecked: boolean;
+    dateChecked: boolean;
 };
 
-const FiltersList = ({ abv , ph, firstBrewed, handleClick, value }: FiltersListProps) => {
+const FiltersList = ({ handleAbvChange, handlePhChange, handleDateChange, abvChecked, phChecked, dateChecked }: FiltersListProps) => {
     return (
         <form className="nav__filter">
-            <FilterItem id="filter1" name={abv.toString()} label="High ABV (> 6.0%)" handleClick={handleClick} value={value}/>
-            <FilterItem id="filter2" name={ph.toString()} label="Acidic (ph < 4)" handleClick={handleClick} value={value}/>
-            <FilterItem id="filter3" name={firstBrewed} label="Classic Range" handleClick={handleClick} value={value}/>
+            <FilterItem key="abvfilter" id="filter1" name="abv" label="High ABV (> 6.0%)" onChange={handleAbvChange} checked={abvChecked} />
+            <FilterItem key="phfilter" id="filter2" name="ph" label="Acidic (ph < 4)" onChange={handlePhChange} checked={phChecked}/>
+            <FilterItem key="rangefilter" id="filter3" name="range" label="Classic Range" onChange={handleDateChange} checked={dateChecked}/>
         </form>
     )
 };

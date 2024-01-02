@@ -1,16 +1,17 @@
-import { MouseEventHandler } from "react";
+import { ChangeEventHandler } from "react";
+import "./FilterItem.scss"
 
 type FiltersItemProps = {
     id: string;
     name: string;
     label: string;
-    handleClick: MouseEventHandler<HTMLInputElement>;
-    value: number;
+    onChange: ChangeEventHandler<HTMLInputElement>;
+    checked: boolean;
 };
 
-const FilterItem = ({ id, name, label, handleClick, value }: FiltersItemProps) => {
+const FilterItem = ({ id, name, label, onChange, checked }: FiltersItemProps) => {
  return (
-<><label htmlFor={name} className="nav__label">{label} </label><input type="checkbox" id={id} name={name} value={value} onClick={handleClick}/><br /></>
+<><label htmlFor={name} className="nav__label">{label} </label><input type="checkbox" id={id} name={name}  onChange={onChange} checked={checked}/><br /></>
     );
 };
 
