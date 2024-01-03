@@ -23,14 +23,15 @@ const App = () => {
     };
     const currentDate = formatDate(todayDate);
 
-
+  
     const [beers, setBeers] = useState<Beer[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [abvChecked, setAbvChecked] = useState<boolean>(false);
     const [phChecked, setPhChecked] = useState<boolean>(false);
     const [dateChecked, setDateChecked] = useState<boolean>(false);
     const [abvNumber, setAbvNumber] = useState<number>(0);
-    const [brewedDate, setBrewedDate] = useState<string>(currentDate); 
+    const [brewedDate, setBrewedDate] = useState<string>(currentDate);
+
 
     const getBeers = async (abv: number, date: string) => {
         const beersData: Beer[] = [];
@@ -44,11 +45,13 @@ const App = () => {
         console.log(beersData);
     };
 
+
     useEffect(() => {
         getBeers(abvNumber, brewedDate);
     }
         , [abvNumber, brewedDate,])
 
+        
     // Filter beers based on search term and ph
     const filterBeers = beers.filter(beer => {
         if (phChecked) {

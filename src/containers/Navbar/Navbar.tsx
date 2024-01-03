@@ -9,19 +9,19 @@ type NavbarProps = {
     searchTerm: string;
     handleInput: FormEventHandler<HTMLInputElement>;
     handleAbvChange: ChangeEventHandler<HTMLInputElement>;
-    handlePhChange:ChangeEventHandler<HTMLInputElement>;
-    handleDateChange:ChangeEventHandler<HTMLInputElement>;
+    handlePhChange: ChangeEventHandler<HTMLInputElement>;
+    handleDateChange: ChangeEventHandler<HTMLInputElement>;
     abvChecked: boolean;
     phChecked: boolean;
     dateChecked: boolean;
 };
 
 const Navbar = ({ name, handleInput, searchTerm, handleAbvChange, handlePhChange, handleDateChange, abvChecked, phChecked, dateChecked }: NavbarProps) => {
-   return ( 
-   <nav className={name}>
-    <SearchBox id="search" name="search" placeholder="Type a beer..." handleInput={handleInput} searchTerm={searchTerm}/>
-    <FiltersList  handleAbvChange={handleAbvChange} handlePhChange={handlePhChange} handleDateChange={handleDateChange} abvChecked={abvChecked} phChecked={phChecked} dateChecked={dateChecked}/>
-    </nav>
+    return (
+        <nav className={name}>
+            <SearchBox id="search" name="search" placeholder="Type a beer..." handleInput={handleInput} searchTerm={searchTerm} />
+            <FiltersList handleAbvChange={handleAbvChange} handlePhChange={handlePhChange} handleDateChange={handleDateChange} abvChecked={abvChecked} phChecked={phChecked} dateChecked={dateChecked} />
+        </nav>
     )
 };
 

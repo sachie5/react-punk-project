@@ -8,13 +8,13 @@ type MainProps = {
 };
 
 const Main = ({ beers }: MainProps) => {
- return (
-    <main className="main" key="main-page">
-    <CardList beers={beers}/>
-    <div className="button-container">
-    </div>
-    </main>
- )
+    return (
+        <main className="main" key="main-page">
+            <CardList beers={beers} />
+            <div className="button-container">
+            </div>
+        </main>
+    )
 };
 
 export default Main;
