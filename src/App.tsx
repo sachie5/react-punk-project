@@ -3,7 +3,7 @@ import BeerInfo from './containers/BeerInfo/BeerInfo';
 import Main from './containers/Main/Main';
 import Navbar from './containers/Navbar/Navbar';
 import { FormEvent, useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import { Beer } from './types/types';
 
 
@@ -95,7 +95,7 @@ const App = () => {
     };
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div className="app">
                 <Routes>
                     <Route path="/" element={
@@ -105,7 +105,7 @@ const App = () => {
                     <Route path="beers/:beerId" element={<BeerInfo beers={beers} />} />
                 </Routes>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     )
 };
 
