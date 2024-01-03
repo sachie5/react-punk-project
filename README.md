@@ -31,7 +31,7 @@ The components in this project are:
 
 ## 3. Key Code 
 
-* getBeers function = acquires data from the PunkAPI. The url only shows a maximum amount of data so used looping to store all the data in an array name beersData. This ensures that the filters appl yo all the beers in the database.
+* getBeers function = acquires data from the PunkAPI. The url only shows a maximum amount of data so used looping to store all the data in an array name beersData. This ensures that the filters apply to all the beers in the database.
 
   * ABV and Brewed before data are parameters in the API so these are used as parameters in the function.
   
