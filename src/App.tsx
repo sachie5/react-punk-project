@@ -42,7 +42,6 @@ const App = () => {
             ; beersData.push(...data);
         }
         setBeers(beersData);
-        console.log(beersData);
     };
 
 
