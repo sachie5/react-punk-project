@@ -5,6 +5,7 @@ import Navbar from './containers/Navbar/Navbar';
 import { FormEvent, useState, useEffect } from 'react';
 import { Routes, Route, HashRouter } from "react-router-dom";
 import { Beer } from './types/types';
+import { formatDate } from './utils';
 
 
 
@@ -12,15 +13,6 @@ const App = () => {
 
     //Format date for parameter
     const todayDate = new Date();
-    const formatDate = (date: Date) => {
-        let month = date.getMonth() + 1;
-        const year = date.getFullYear();
-        let newDate = `${month}-${year}`
-        if (month < 10) {
-            newDate = `0${month}-${year}`
-        }
-        return newDate;
-    };
     const currentDate = formatDate(todayDate);
 
   
@@ -73,7 +65,7 @@ const App = () => {
     // High ABV filter
     const handleAbvChange = () => {
         const newAbvChecked = !abvChecked;
-        if (newAbvChecked === true) {
+        if (newAbvChecked) {
             setAbvNumber(6);
         }
         else {
@@ -85,7 +77,7 @@ const App = () => {
     // Classic range filter
     const handleDateChange = () => {
         const newDateChecked = !dateChecked;
-        if (newDateChecked === true) {
+        if (newDateChecked) {
             setBrewedDate("01-2010");
         } else {
             setBrewedDate(currentDate);
